@@ -81,4 +81,4 @@ _(Include a GIF of the system in action)_
 ---
 
 ## 👨‍💻 Contributors
-Developed by **[Your Name]** 🚀
+Developed by **Omar TERRO** 🚀
