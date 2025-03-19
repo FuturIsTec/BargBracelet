@@ -21,16 +21,17 @@ BargBracelet is a **smart child safety bracelet** that uses an **ESP8266 module*
 2️⃣ **Parent taps “Call” in the Android app** → The bracelet starts **vibrating** and the **LED flashes**  
 3️⃣ **Child presses the bracelet button** → The motor stops, LED flashes for 5 seconds, and a **notification is sent back to the app**  
 4️⃣ **If the child doesn’t respond in 10 seconds**, an automatic **alert is sent to the app**  
-5️⃣ Parent can **re-trigger vibration** from the app if needed  
+5️⃣ Parent can **re-trigger vibration** using “Vibrate” button from the app if needed  
 
 ---
 
 ## 🔗 WebSocket Communication
-| **Message**                 | **Sender**       | **Receiver**      | **Action** |
-|-----------------------------|-----------------|------------------|------------|
-| `"CALL"`                    | **Android App** | **ESP8266**      | Vibrate motor, start LED flashing |
-| `"bracelet button clicked"` | **ESP8266**     | **Android App**  | Stop vibration, send confirmation |
-| `"No response from bracelet"` | **ESP8266**     | **Android App**  | Timeout alert if no button press |
+| **Message**                   | **Sender**       | **Receiver**      | **Action** |
+|-------------------------------|------------------|-------------------|-----------------------------------|
+| `"CALL"`                      | **Android App**  | **ESP8266**       | Vibrate motor, start LED flashing |
+| `"Vibrate"`                   | **Android App**  | **ESP8266**       | Re-trigger vibration              |
+| `"bracelet button clicked"`   | **ESP8266**      | **Android App**   | Stop vibration, send confirmation |
+| `"No response from bracelet"` | **ESP8266**      | **Android App**   | Timeout alert if no button press  | 
 
 ---
 
@@ -40,21 +41,6 @@ BargBracelet is a **smart child safety bracelet** that uses an **ESP8266 module*
 - **Vibration Motor** (For alerts)  
 - **LED** (For flashing indicator)  
 - **Android Device** (For the parent app)  
-
----
-
-## 📜 Code Explanation
-- **ESP8266 Code:**
-  - Handles WebSocket communication  
-  - Controls **motor activation & LED flashing**  
-  - Reads **button input** and sends messages to the app  
-  - **Timeout mechanism** to alert the parent if no response  
-- **Android App:**
-  - Connects to the ESP8266 WebSocket server  
-  - Sends **"CALL"** to trigger bracelet vibration  
-  - Receives **button press response** from the bracelet  
-  - Sends **"vibrate again"** if needed  
-
 ---
 
 ## 📷 Screenshots & GIF Demo
@@ -66,9 +52,12 @@ _(Include a GIF of the system in action)_
 1. **Upload the ESP8266 Code** to your NodeMCU  
 2. **Run the Android App** (Connect to the ESP WiFi)  
 3. **Test the Communication:**
+   - Sign in
+   - Connect to the bracelet
+   - Go to the pickup screen and scan the QR code  
    - Click "Call" → The bracelet vibrates  
-   - Press the button → The app receives confirmation  
-   - If no response, a timeout alert is triggered  
+   - Press the button → The app will receive a confirmation and it will be displayed on the notification screen
+   - If there is no response, a timeout alert is triggered and u can press the Vibrate button to Re-trigger the vibration 
 
 ---
 
